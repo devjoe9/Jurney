@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup Box</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+            display: none;
+            z-index: 999;
+        }
+        .overlay.active {
+            opacity: 1;
+            display: block;
+        }
+        .popup {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: left;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            display: none;
+            z-index: 1000;
+            width:25%;
+            height: 200px;
+        }
+        .popup input{
+            width:70%;
+            font-size: 19px;
+            padding:5px;
+        }
+        .popup > .change{
+            font-size: 17px;
+            padding:10px;
+            border: none;
+            color:#fff;
+            background: #a57b5b;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .popup.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            display: block;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+       
+    </style>
+</head>
+<body>
+    <button onclick="openPopup()">Open Popup</button>
+    <div class="overlay" id="popupOverlay"></div>
+
+    <div class="popup" id="popupUser">
+    <button class="close-btn" onclick="closePopup()">X</button>
+        <h2>Change Username</h2>
+        <input type="text" placeholder="New Username"><br>
+        <button class="change">Change</button>
+    </div>
+    
+    <script>
+        function openPopup() {
+            let popup = document.getElementById('popupUser');
+            let overlay = document.getElementById('popupOverlay');
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+            setTimeout(() => {
+                overlay.classList.add('active');
+                popup.classList.add('active');
+            }, 10);
+        }
+        function closePopup() {
+            let popup = document.getElementById('popupUser');
+            let overlay = document.getElementById('popupOverlay');
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                popup.style.display = 'none';
+                overlay.style.display = 'none';
+            }, 300);
+        }
+    </script>
+</body>
+</html>
